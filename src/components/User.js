@@ -7,7 +7,17 @@ import { IRON } from '../common/style/colors';
 class User extends PureComponent {
 
     static propTypes = {
-        name: PropTypes.string.isRequired
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        onFetchProfile: PropTypes.func.isRequired,
+    };
+
+    handleClick = () => {
+        const { id, onFetchProfile, navigation } = this.props;
+
+        onFetchProfile(id);
+
+        navigation.push("Profile")
     };
 
     render() {
@@ -15,7 +25,7 @@ class User extends PureComponent {
 
         return (
             <TouchableHighlight underlayColor={IRON}>
-                <Text style={styles.nameBlock}>
+                <Text style={styles.nameBlock} onPress={this.handleClick}>
                     {name}
                 </Text>
             </TouchableHighlight>

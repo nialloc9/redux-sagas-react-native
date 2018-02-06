@@ -3,10 +3,15 @@ import { View, Text } from 'react-native';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetch as onFetchUsers } from '../actions/users';
+import { fetch as onFetchProfile } from '../actions/profile';
 import User from '../components/User';
 import styles from './styles/app';
 
-class App extends Component {
+class Home extends Component {
+
+    static navigationOptions = {
+        title: 'Home'
+    };
 
     componentDidMount(){
         const { onFetchUsers } = this.props;
@@ -15,12 +20,12 @@ class App extends Component {
 
     render() {
 
-        const { data } = this.props;
+        const { data, navigation, onFetchProfile } = this.props;
 
         return (
             <View style={styles.container}>
                 {
-                    data.map(o => <User key={o.id} {...o} />)
+                    data.map(o => <User key={o.id} {...o} navigation={navigation} onFetchProfile={onFetchProfile} />)
                 }
             </View>
         );
@@ -50,9 +55,10 @@ const mapStateToProps = ({
 const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
-            onFetchUsers
+            onFetchUsers,
+            onFetchProfile
         },
         dispatch
     );
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
