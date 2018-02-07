@@ -11,7 +11,7 @@ import {
  * @param type
  * @param payload
  */
-function* fetchUsers({ type, payload }) {
+export function* fetchUsers({ type, payload }) {
     try {
         const users = yield call(fetch);
 

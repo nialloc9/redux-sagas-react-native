@@ -1,10 +1,19 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { View, Text, Button } from 'react-native';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import styles from './styles/app';
 
 class Profile extends PureComponent {
+
+    static propTypes = {
+        data: PropTypes.shape({
+            address: PropTypes.shape({
+                city: PropTypes.string
+            })
+        })
+    };
 
     static navigationOptions = {
         title: 'Profile',
@@ -17,7 +26,7 @@ class Profile extends PureComponent {
     };
 
     render() {
-        const { data, navigation } = this.props;
+        const { data } = this.props;
 
         if(!data){
             return(
@@ -30,7 +39,10 @@ class Profile extends PureComponent {
         return (
             <View style={styles.container}>
                 <Text>{data.address.city}</Text>
-                <Button onPress={this.handleBackClick} title="Back"/>
+                <Button
+                    onPress={this.handleBackClick}
+                    title="Back"
+                />
             </View>
         );
     }
