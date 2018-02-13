@@ -11,7 +11,7 @@ import {
  * @param type
  * @param payload
  */
-function* fetch({ type, payload }) {console.log("hello")
+function* fetch({ type, payload }) {
 
     const { id } = payload;
 
